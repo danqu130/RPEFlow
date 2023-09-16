@@ -157,7 +157,7 @@ EPE: 0.103
 </details>
 
 ### Training
-The model training requires four 24G GPUs (e.g., 4x3090). We first pre-trained on FlyingThings3D and then fine-tuned on EKubric and DSEC respectively.
+The model training requires four 24G GPUs (e.g., 4x3090). We first pre-train on FlyingThings3D and then fine-tune on EKubric and DSEC respectively.
 
 ```
 python train.py --config ./conf/train/pretrain.yaml
