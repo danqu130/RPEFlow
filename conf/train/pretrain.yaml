@@ -1,0 +1,104 @@
+trainset:
+  name: flyingthings3devent
+  root_dir: datasets/FlyingThings3D_subset_pc
+  split: train
+  n_workers: 4
+  drop_last: true
+
+  n_points: 8192
+  max_depth: 35.0
+
+  event_bins: 10
+  event_polarity: true
+
+  augmentation:
+    enabled: true
+    color_jitter:
+      enabled: false
+    random_horizontal_flip:
+      enabled: true
+    random_vertical_flip:
+      enabled: true
+    random_crop:
+      enabled: false
+    random_scale:
+      enabled: false
+
+valset:
+  name: flyingthings3devent
+  root_dir: datasets/FlyingThings3D_subset_pc
+  split: val
+  n_workers: 4
+
+  n_points: 8192
+  max_depth: 35.0
+
+  event_bins: 10
+  event_polarity: true
+
+  augmentation:
+    enabled: false
+
+model:
+  name: RPEFlow
+  batch_size: 16
+  freeze_bn: false
+
+  ids:
+    enabled: true
+    sensor_size_divisor: 32
+
+  attention:
+    norm: WithBias # BiasFree
+    attention: mdta
+    layers: 2
+
+  pwc2d:
+    event_bins: 10
+    event_polarity: true
+    norm:
+      feature_pyramid: batch_norm
+      flow_estimator: null
+      context_network: null
+    max_displacement: 4
+
+  pwc3d:
+    norm:
+      feature_pyramid: batch_norm
+      correlation: null
+      flow_estimator: null
+    k: 16
+
+  loss2d:
+    level_weights: [8, 4, 2, 1, 0.5]
+    order: l2
+
+  loss3d:
+    level_weights: [8, 4, 2, 1, 0.5]
+    order: l2
+
+training:
+  max_epochs: 600
+  optimizer: adam
+  lr:
+    scheduler: 'MultiStepLR'
+    init_value: 0.0004
+    momentum: 0.9
+    decay_rate: 0.5
+    decay_milestones: [400, 500]
+  weight_decay: 0.000001
+  bias_decay: 0.0
+
+log:
+  dir: outputs/RPEFlow_pretrain_gpu4xbs4
+  run_name: RPEFlow_pretrain_gpu4xbs4
+  save_ckpt: true
+  save_ckpt_every_n_epochs: 1
+  save_summary_every_n_steps: 100
+
+ckpt:
+  path: null
+  resume: false
+
+port: random  # for multi-gpu training
+amp: false
