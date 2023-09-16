@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from .pwc3d_core import build_pc_pyramid
-from .RPEFlow_core import PWCFusionCoreAttentionMIEventCorr
+from .RPEFlow_core import RPEFlow_core
 from .losses2d import calc_supervised_loss_2d
 from .losses3d import calc_supervised_loss_3d
 from .utils import resize_to_64x, resize_flow2d, perspect2parallel, parallel2perspect
@@ -11,7 +11,7 @@ class RPEFlow(nn.Module):
     def __init__(self, cfgs):
         super(RPEFlow, self).__init__()
         self.cfgs = cfgs
-        self.pwc_fusion_core = PWCFusionCoreAttentionMIEventCorr(cfgs.pwc2d, cfgs.pwc3d, cfgs.attention)
+        self.pwc_fusion_core = RPEFlow_core(cfgs.pwc2d, cfgs.pwc3d, cfgs.attention)
         self.is_mi = True
 
         self.loss = None

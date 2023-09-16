@@ -162,10 +162,7 @@ class DecoderFeatureFuser3D(nn.Module):
         return out, latent_loss
 
 
-class PWCFusionCoreAttentionMIEventCorr(nn.Module):
-    """
-    The main architecture of CamLiFlow, which is built on top of PWC-Net and Point-PWC.
-    """
+class RPEFlow_core(nn.Module):
     def __init__(self, cfgs2d, cfgs3d, cfgsattention, debug=False):
         super().__init__()
         self.cfgs2d, self.cfgs3d, self.debug = cfgs2d, cfgs3d, debug
