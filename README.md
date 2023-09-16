@@ -1,7 +1,7 @@
 
 ## RPEFlow: Multimodal Fusion of RGB-PointCloud-Event for Joint Optical Flow and Scene Flow Estimation (ICCV 2023)
 
-[Project Page](https://npucvr.github.io/RPEFlow/), [arXiv](https://arxiv.org/abs/xxx), [IEEE](https://ieeexplore.ieee.org/document/xxx), [Supp](supp.pdf). (Waiting for updates)
+[Project Page](https://npucvr.github.io/RPEFlow/), [arXiv](https://arxiv.org/abs/xxx), [IEEE](https://ieeexplore.ieee.org/document/xxx), [Supp](https://github.com/danqu130/RPEFlow/releases/download/supp/RPEFlow-supp.pdf). (Waiting for updates)
 
 <img src="assets/viz.jpg" width="90%" />
 
@@ -67,7 +67,7 @@ If you just want to run this project, just download our pre-processed files [her
 dataset/DSEC/
 ├── train_preprocess_pc
 ``` 
-Since there is no ground truth flow for the official test set, we can only divide the official training set into a `train` set and a `val` set. See [TRAIN_SEQUENCE](./dsec.py#209) for details.
+Since there is no ground truth flow for the official test set, we can only divide the official training set into a `train` set and a `val` set. See [TRAIN_SEQUENCE](./dsec.py#L207) for details.
 
 <details><summary> Optional. If it doesn't meet your needs, </summary>
 you should first download the raw <a href="https://dsec.ifi.uzh.ch/dsec-datasets/download/" target="_blank">DSEC</a> dataset and perform the disparity and aligned image (<a href="https://github.com/uzh-rpg/DSEC/issues/25" target="_blank">Events and frame alignment</a>) generation steps.
