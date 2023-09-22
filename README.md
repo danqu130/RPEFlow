@@ -157,9 +157,11 @@ EPE: 0.103
 </details>
 
 ### Training
-The model training requires four 24G GPUs (e.g., 4x3090). We first pre-train on FlyingThings3D and then fine-tune on EKubric and DSEC respectively.
+The model training requires four 24G GPUs (4 RTX3090 we use). We first pre-train on FlyingThings3D and then fine-tune on EKubric and DSEC respectively.
+Note that the pre-train stage on FlyingThings3D may take more than 8 days.
 
 ```
+export CUDA_VISIBLE_DEVICES=0,1,2,3
 python train.py --config ./conf/train/pretrain.yaml
 python train.py --config ./conf/train/kubric.yaml --weights ./outputs/RPEFlow_pretrain_gpu4xbs4/best.pt
 python train.py --config ./conf/train/dsec.yaml --weights ./outputs/RPEFlow_pretrain_gpu4xbs4/best.pt
