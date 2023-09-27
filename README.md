@@ -1,7 +1,7 @@
 
 ## RPEFlow: Multimodal Fusion of RGB-PointCloud-Event for Joint Optical Flow and Scene Flow Estimation (ICCV 2023)
 
-[Project Page](https://npucvr.github.io/RPEFlow/), [arXiv](https://arxiv.org/abs/xxx), [IEEE](https://ieeexplore.ieee.org/document/xxx), [Supp](https://github.com/danqu130/RPEFlow/releases/download/supp/RPEFlow-supp.pdf). (Waiting for updates)
+[Project Page](https://npucvr.github.io/RPEFlow/), [arXiv](https://arxiv.org/pdf/2309.15082.pdf), [Supp](https://github.com/danqu130/RPEFlow/releases/download/supp/RPEFlow-supp.pdf). 
 
 <img src="assets/viz.jpg" width="90%" />
 
@@ -170,7 +170,7 @@ python train.py --config ./conf/train/dsec.yaml --weights ./outputs/RPEFlow_pret
 ### Citation
 ```
 @InProceedings{Wan_RPEFlow_ICCV_2023,
-  author    = {Zhexiong Wan, Yuxin Mao, Jing Zhang, Yuchao Dai},
+  author    = {Wan, Zhexiong and Mao, Yuxin and Zhang, Jing and Dai, Yuchao},
   title     = {RPEFlow: Multimodal Fusion of RGB-PointCloud-Event for Joint Optical Flow and Scene Flow Estimation},
   booktitle = {Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
   year      = {2023},
