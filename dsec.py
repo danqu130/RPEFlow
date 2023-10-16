@@ -359,12 +359,6 @@ class DSECTrain(torch.utils.data.Dataset):
                                            if os.path.isfile(os.path.join(left_image_folder, f)) and f.endswith(".png")])
             left_image_filenames = [os.path.join(
                 left_image_folder, f) for f in left_image_filenames]
-            right_image_folder = os.path.join(
-                full_seq, 'images', 'right', 'ev_inf')
-            # right_image_filenames = sorted([f for f in os.listdir(right_image_folder)
-            #                                 if os.path.isfile(os.path.join(right_image_folder, f)) and f.endswith(".png")])
-            # right_image_filenames = [os.path.join(
-            #     right_image_folder, f) for f in right_image_filenames]
             image_ts = np.loadtxt(os.path.join(
                 full_seq, 'images', 'timestamps.txt'), dtype='int64')
 
@@ -372,10 +366,6 @@ class DSECTrain(torch.utils.data.Dataset):
                 full_seq, 'events', 'left', 'events.h5')
             left_event_rectify = os.path.join(
                 full_seq, 'events', 'left', 'rectify_map.h5')
-            right_event_file_name = os.path.join(
-                full_seq, 'events', 'right', 'events.h5')
-            right_event_rectify = os.path.join(
-                full_seq, 'events', 'right', 'rectify_map.h5')
 
             seq_length = len(forward_flow_filenames) if not self.isbi \
                 else len(forward_flow_filenames) - 1
@@ -534,12 +524,6 @@ class DSECTrain(torch.utils.data.Dataset):
         flow12_filename = self.forward_flow_filenames[index]
         flow12, flow12_valid = self.load_flow(flow12_filename)
 
-        # flow21 = None
-        # flow21_valid = None
-        # if self.isbi:
-        #     flow21_filename = self.backward_flow_filenames[index]
-        #     flow21, flow21_valid = self.load_flow(flow21_filename)
-
         calibration_filename = self.calibration_filenames[index]
         calib_conf = OmegaConf.load(calibration_filename)
         intrinsics = np.array(calib_conf['intrinsics']['camRect0']['camera_matrix'])
@@ -581,15 +565,6 @@ class DSECTrain(torch.utils.data.Dataset):
                     voxel_grid.put_(
                         index[mask], interp_weights[mask], accumulate=True)
 
-        # if self.normalize:
-        #     mask = torch.nonzero(voxel_grid, as_tuple=True)
-        #     if mask[0].size()[0] > 0:
-        #         mean = voxel_grid[mask].mean()
-        #         std = voxel_grid[mask].std()
-        #         if std > 0:
-        #             voxel_grid[mask] = (voxel_grid[mask] - mean) / std
-        #         else:
-        #             voxel_grid[mask] = voxel_grid[mask] - mean
         return voxel_grid
 
     def eventsToVoxelInter(self, events, num_bins, height, width, event_polarity=False):
@@ -765,9 +740,6 @@ class DSECTrain(torch.utils.data.Dataset):
         depth12[mask12 == 0] = 1e6
 
         mask = np.logical_and(np.logical_and(mask1, mask12), flow_2d_mask)
-
-        # kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-        # mask = cv2.erode(mask.astype(np.float32), kernel) > 0.5
 
         pc1 = depth2pc(depth1, f=f, cx=cx, cy=cy)[mask]
         pc2 = depth2pc(depth12, f=f, cx=cx, cy=cy, flow=flow_2d)[mask]

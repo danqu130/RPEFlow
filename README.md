@@ -62,7 +62,7 @@ you should first download the raw <a href="https://drive.google.com/drive/folder
 </details>
 
 #### DSEC
-If you just want to run this project, just download our pre-processed files [here](https://drive.google.com/file/d/1CyEbgqBU1VXdohHWPkd7ForKlZZL9n-D/view).
+If you just want to run this project, just download our pre-processed files [here](https://drive.google.com/drive/folders/1p-gz3HcR6bp65Ms6IGaHCIhAPwOXQ_LE).
 ```
 dataset/DSEC/
 ├── train_preprocess_pc
