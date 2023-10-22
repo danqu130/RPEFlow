@@ -233,8 +233,6 @@ class Trainer:
 
     def load_ckpt(self, filepath, resume=True):
         logging.info('Loading checkpoint from %s' % filepath)
-        checkpoint = torch.load('./checkpoint/RPEFlow_things.pt', self.device)
-        self.model.load_state_dict(checkpoint['state_dict'], strict=True)
         checkpoint = torch.load(filepath, self.device)
         if resume:
             self.curr_epoch = checkpoint['last_epoch'] + 1
