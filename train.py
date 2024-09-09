@@ -111,7 +111,7 @@ class Trainer:
 
         if self.n_gpus > 1:
             self.model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(self.model)
-            self.ddp = DistributedDataParallel(self.model, [self.device.index], find_unused_parameters=True)
+            self.ddp = DistributedDataParallel(self.model, [self.device.index])
         else:
             self.ddp = self.model
 
